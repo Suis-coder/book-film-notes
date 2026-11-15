@@ -2,6 +2,19 @@
    新增筆記時，在陣列「最前面」加一筆。欄位說明見 AGENTS.md §6 */
 window.NOTES = [
   {
+    slug: "your-name",
+    type: "film",
+    title: "你的名字",
+    original: "君の名は。",
+    creator: "新海誠",
+    year: 2016,
+    genre: ["動畫", "奇幻", "愛情"],
+    rating: 4.5,
+    finished: "2026-11-15",
+    oneLiner: "兩個陌生人交換了人生，最後拚命想記住的只是一個名字。",
+    cover: "plum"
+  },
+  {
     slug: "atomic-habits",
     type: "book",
     title: "原子習慣",
