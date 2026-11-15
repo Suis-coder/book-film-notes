@@ -13,6 +13,12 @@
   --star-empty: #d9cfbd;
   --cover-text: #fbf7ee;
 
+  /* 書架木頭 */
+  --wood: #9a7552;
+  --wood-light: #b8946c;
+  --wood-dark: #6e5238;
+  --shelf-back: #ebe2d1;
+
   /* 封面色票：notes.js 的 cover 欄位只能用這 6 個 */
   --cover-sage: #5f7f6a;
   --cover-ink: #2f3e55;
@@ -56,7 +62,66 @@ a { color: inherit; }
 .stats { margin-top: 20px; display: flex; gap: 28px; flex-wrap: wrap; font-size: 15px; color: var(--muted); }
 .stats b { font-family: var(--serif); font-size: 26px; color: var(--ink); margin-right: 4px; }
 
-.filters { display: flex; gap: 8px; margin: 28px 0 8px; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin: 28px 0 8px; }
+.filters { display: flex; gap: 8px; }
+.search {
+  font: inherit; font-size: 15px;
+  width: min(320px, 100%);
+  padding: 6px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--cover-text);
+  color: var(--ink);
+}
+.search:focus { outline: none; border-color: var(--ink); }
+.empty { color: var(--muted); padding: 48px 0; text-align: center; }
+
+/* ---------- 書架 ---------- */
+.shelf { margin: 36px 0 56px; }
+.shelf-label {
+  font-family: var(--serif); font-size: 22px; margin: 0 0 4px;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.shelf-label span { font-family: var(--sans); font-size: 14px; color: var(--muted); font-weight: 400; }
+/* 每一排的高度固定，用重複漸層畫出「整排滿版」的層板：
+   0–300px 書架背板 → 300–314px 木頭層板 → 314–322px 層板陰影 → 文字區 */
+.shelf-row {
+  --stand: 300px;
+  --row: 480px;
+  --gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-auto-rows: var(--row);
+  column-gap: 0;
+  row-gap: var(--gap);
+  background: repeating-linear-gradient(to bottom,
+    var(--shelf-back) 0 var(--stand),
+    var(--wood-light) var(--stand) calc(var(--stand) + 2px),
+    var(--wood) calc(var(--stand) + 2px) calc(var(--stand) + 11px),
+    var(--wood-dark) calc(var(--stand) + 11px) calc(var(--stand) + 14px),
+    rgba(43, 42, 40, 0.18) calc(var(--stand) + 14px) calc(var(--stand) + 15px),
+    transparent calc(var(--stand) + 22px) calc(var(--row) + var(--gap)));
+  border-radius: 4px 4px 0 0;
+}
+.slot { text-decoration: none; display: block; overflow: hidden; }
+.slot .card-title, .slot .card-meta, .slot .card-line { margin-left: 22px; margin-right: 22px; }
+.slot .stars { margin-left: 22px; }
+.stand {
+  height: calc(var(--stand) + 1px);
+  padding: 24px 22px 0;
+  display: flex; align-items: flex-end;
+}
+.stand .cover { width: 100%; max-width: 168px; margin: 0 auto; box-shadow: 4px 0 10px -4px rgba(43, 42, 40, 0.5); }
+.slot:hover .cover { transform: translateY(-8px) rotate(-1.5deg); }
+.slot .card-title { margin-top: 26px; }
+.slot .card-title, .slot .card-meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slot .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 真實書封（蓋在字卡上，載入失敗會被移除） */
+.cover-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; background: var(--paper-deep);
+}
 .filter {
   font: inherit; font-size: 15px;
   padding: 4px 18px;
@@ -70,14 +135,6 @@ a { color: inherit; }
 .filter[data-filter="book"][aria-pressed="true"] { background: var(--book); border-color: var(--book); }
 .filter[data-filter="film"][aria-pressed="true"] { background: var(--film); border-color: var(--film); }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 36px 28px;
-  padding: 28px 0 72px;
-}
-.card { text-decoration: none; display: block; }
-.card:hover .cover { transform: translateY(-4px); box-shadow: 0 14px 24px -12px rgba(43, 42, 40, 0.45); }
 .card-title { font-family: var(--serif); font-size: 20px; font-weight: 700; margin: 14px 0 0; line-height: 1.4; }
 .card-meta { color: var(--muted); font-size: 14px; margin: 2px 0 6px; }
 .card-line { font-size: 15px; margin: 6px 0 0; }
@@ -178,6 +235,11 @@ a { color: inherit; }
 @media (max-width: 600px) {
   .note-head { grid-template-columns: 1fr; }
   .note-head .cover { max-width: 160px; }
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
-  .cover-title { font-size: 20px; }
+  .shelf-row { grid-template-columns: repeat(2, 1fr); --stand: 230px; --row: 430px; }
+  .cover-foot { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stand { padding: 18px 12px 0; }
+  .slot .card-title, .slot .card-meta, .slot .card-line { margin-left: 12px; margin-right: 12px; }
+  .slot .stars { margin-left: 12px; }
+  .cover { padding: 14px 12px 12px 18px; }
+  .cover-title { font-size: 18px; }
 }

@@ -38,6 +38,7 @@ window.NOTES = [
     rating: 4.5,
     finished: "2026-10-20",
     oneLiner: "長大以後再讀，才發現這本是寫給大人的。",
-    cover: "sage"
+    cover: "sage",
+    isbn: "9780156012195"
   }
 ];

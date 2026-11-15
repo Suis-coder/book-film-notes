@@ -20,17 +20,20 @@
   </header>
 
   <main class="wrap">
-    <div class="filters" role="group" aria-label="篩選類型">
-      <button class="filter" data-filter="all" aria-pressed="true">全部</button>
-      <button class="filter" data-filter="book" aria-pressed="false">書</button>
-      <button class="filter" data-filter="film" aria-pressed="false">影</button>
+    <div class="toolbar">
+      <div class="filters" role="group" aria-label="篩選類型">
+        <button class="filter" data-filter="all" aria-pressed="true">全部</button>
+        <button class="filter" data-filter="book" aria-pressed="false">書</button>
+        <button class="filter" data-filter="film" aria-pressed="false">影</button>
+      </div>
+      <input class="search" id="search" type="search" placeholder="搜尋書名、作者、類型、心得…" aria-label="搜尋作品">
     </div>
-    <div class="grid" id="grid"></div>
+    <div id="shelves"></div>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      本站依照 <a href="https://github.com/Suis-coder/book-film-notes/blob/main/AGENTS.md">AGENTS.md</a> 的規則持續新增內容。不放海報與劇照，封面為文字字卡。
+      本站依照 <a href="https://github.com/Suis-coder/book-film-notes/blob/main/AGENTS.md">AGENTS.md</a> 的規則持續新增內容。書封來自站長實拍或 Open Library，電影不放海報與劇照。
     </div>
   </footer>
 

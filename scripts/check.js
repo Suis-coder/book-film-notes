@@ -33,6 +33,12 @@ for (const n of notes) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(n.finished || "")) err(id, "finished 格式要是 YYYY-MM-DD");
   if (n.oneLiner && [...n.oneLiner].length > 30) err(id, "oneLiner 超過 30 字");
   if (!COVERS.includes(n.cover)) err(id, `cover 只能是 ${COVERS.join("/")}`);
+  if (n.isbn !== undefined && !/^(\d{9}[\dX]|\d{13})$/.test(n.isbn)) err(id, "isbn 要是 10 或 13 碼、不含連字號的字串");
+  if (n.coverImage !== undefined) {
+    if (!/^[a-z0-9-]+\.(jpg|png|webp)$/.test(n.coverImage)) err(id, "coverImage 要是 <slug>.jpg/.png/.webp");
+    else if (!fs.existsSync(path.join(ROOT, "assets/covers", n.coverImage))) err(id, `找不到 assets/covers/${n.coverImage}`);
+  }
+  if ((n.isbn || n.coverImage) && n.type !== "book") err(id, "只有書可以用 isbn／coverImage，電影不放海報");
 
   // 對應的頁面檢查
   if (!TYPES[n.type]) continue;
