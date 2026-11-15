@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>看完再說｜讀書／影評筆記</title>
+  <meta name="description" content="一部作品一頁的讀書與觀影筆記。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="index">
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="site-title">看完再說</h1>
+      <p class="site-sub">一本書、一部電影，看完就寫一頁。給以後的自己，也給想找下一部作品的你。</p>
+      <div class="stats" id="stats"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="filters" role="group" aria-label="篩選類型">
+      <button class="filter" data-filter="all" aria-pressed="true">全部</button>
+      <button class="filter" data-filter="book" aria-pressed="false">書</button>
+      <button class="filter" data-filter="film" aria-pressed="false">影</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      本站依照 <a href="https://github.com/Suis-coder/book-film-notes/blob/main/AGENTS.md">AGENTS.md</a> 的規則持續新增內容。不放海報與劇照，封面為文字字卡。
+    </div>
+  </footer>
+
+  <script src="data/notes.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>
