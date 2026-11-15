@@ -2,6 +2,20 @@
    新增筆記時，在陣列「最前面」加一筆。欄位說明見 AGENTS.md §6 */
 window.NOTES = [
   {
+    slug: "atomic-habits",
+    type: "book",
+    title: "原子習慣",
+    original: "Atomic Habits",
+    creator: "詹姆斯．克利爾",
+    year: 2018,
+    genre: ["自我成長", "習慣養成"],
+    rating: 4,
+    finished: "2026-11-15",
+    oneLiner: "方法很好用，馬上就能試，只是同一個道理講了很多遍。",
+    cover: "ochre",
+    isbn: "9789861755267"
+  },
+  {
     slug: "the-shawshank-redemption",
     type: "film",
     title: "刺激1995",
